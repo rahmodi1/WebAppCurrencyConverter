@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<h2>Currency Converter</h2>
+
+<div class="form-group">
+    <label id="lblAmount" class="col-md-2 control-label">Amount</label>
+    <div class="col-md-10">
+        <input id="txtAmount" maxlength="12" size="5" value="1" class="form-control" />
+    </div>
+</div>
+<div class="form-group">
+    <label id="lblfrom" class="col-md-2 control-label">Currency From</label>
+    <div class="col-md-10">
+        <select id="ddlfrom" class="form-control">
+            <option value="0">Select One</option>
+            <option value="USD">US Dollar (USD)</option>
+            <option value="GBP">British Pound Sterling (GBP)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="CAD">Canadian Dollar (CAD)</option>
+            <option value="SGD">Singapore Dollar (SGD)</option>
+        </select>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input id="btnConvert" type="button" value="Convert" class="btn btn-default" />
+    </div>
+</div>
+<br />
+Result :
+<label id="lblValue" class="form-control"></label>
+<br />
+<label id="lblJSON" class="form-control"></label>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnConvert').click(function () {
+            var objCurrencyInput = new Object();
+
+            objCurrencyInput.SourceCurrency = $('#ddlfrom').val();
+            objCurrencyInput.Amount = $('#txtAmount').val();
+
+            var DTO = { 'objCurrencyInput': objCurrencyInput };
+            var parameters = JSON.stringify(DTO);
+            $.loader();
+            $.ajax({
+                type: 'POST',
+                url: "/Home/CurrencyConvertAction",
+                data: $('#ddlto').val() != 0 ? parameters : "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,
+                success: function (response) {
+                    if (response.success == true) {
+                        var objCurrencyOutput = new Object();
+                        objCurrencyOutput = JSON.parse(response.content);
+
+                        $('#lblValue').text(objCurrencyOutput.Amount + " "  + objCurrencyOutput.SourceCurrency + " = " + objCurrencyOutput.Total + " INR");
+                        $('#lblJSON').text(response.content);
+                        $.loader('close');
+                    } else {
+                        $('#lblJSON').text(response.content);
+                        $.loader('close');
+                    }
+                },
+                error: function (xhr) {
+                    $('#lblJSON').text("Error Occures..!!");
+                    $.loader('close');
+                }
+            });
+        });
+    });
+</script>

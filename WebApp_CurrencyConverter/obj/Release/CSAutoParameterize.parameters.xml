@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-WebApp_CurrencyConverter-20160330100701.mdf;Initial Catalog=aspnet-WebApp_CurrencyConverter-20160330100701;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Rahul\\WebApp_CurrencyConverter\\WebApp_CurrencyConverter\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="DbRateListEntities-Web.config Connection String" description="DbRateListEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/CurrencyConverterModel.csdl|res://*/CurrencyConverterModel.ssdl|res://*/CurrencyConverterModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=dbserverlive.database.windows.net;initial catalog=DbRateList;user id=azureadmin;password=admin123!@#;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Rahul\\WebApp_CurrencyConverter\\WebApp_CurrencyConverter\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DbRateListEntities']/@connectionString" />
+  </parameter>
+</parameters>
